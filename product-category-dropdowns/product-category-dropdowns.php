@@ -7,12 +7,12 @@
  * Author URI: http://hottons.com
  * License: GPLv2     
  * Requires at least: 4.7
- * Tested up to: 6.5.5
+ * Tested up to: 6.8
  *
  * Text Domain: product-category-dropdowns
  *
  * WC requires at least: 3.0
- * WC tested up to: 8.8.5
+ * WC tested up to: 10.2.2
  * 
  * @package ProductCategoryDropdowns
  * @author Pektsekye
@@ -111,6 +111,12 @@ if (in_array('woocommerce/woocommerce.php', (array) get_option('active_plugins',
   Pektsekye_PCD();
 }
 
+// define compatibility with WooCommerce HPOS (High-Performance Order Storage)
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );
 
 
 
